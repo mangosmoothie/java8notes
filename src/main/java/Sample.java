@@ -8,13 +8,14 @@ import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Created by nlloyd on 2/4/16.
  */
 public class Sample {
     public static void main(String[] args) throws Exception{
-        getGcd();
+        bigSum();
 
     }
 
@@ -101,6 +102,13 @@ public class Sample {
         System.out.println(rez);
     }
 
+    public static void bigSum(){
+        //reads the number of longs given by the first input and prints the sum
+        Scanner scanner = new Scanner(System.in);
+        Long sum = Stream.generate(scanner::next).limit(scanner.nextLong()).mapToLong(Long::parseLong).sum();
+        System.out.println(sum);
+
+    }
 
 }
 
