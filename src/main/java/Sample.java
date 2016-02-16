@@ -15,7 +15,6 @@ import java.util.stream.Stream;
  */
 public class Sample {
     public static void main(String[] args) throws Exception{
-        bigSum();
 
     }
 
@@ -108,6 +107,37 @@ public class Sample {
         Long sum = Stream.generate(scanner::next).limit(scanner.nextLong()).mapToLong(Long::parseLong).sum();
         System.out.println(sum);
 
+    }
+
+    public static void filterCount(){
+        Scanner scanner = new Scanner(System.in);
+        IntStream.range(0, scanner.nextInt()).forEach(x -> {
+            int nums = scanner.nextInt();
+            int limit = scanner.nextInt();
+            long count = Stream.generate(scanner::nextInt).limit(nums).filter(y -> y < 1).count();
+            if(count >= limit){
+                System.out.println("NO");
+            }else{
+                System.out.println("YES");
+            }
+        });
+//        2
+//        4 3
+//        -1 -3 4 2
+//        4 2
+//        0 -1 2 1
+
+    }
+
+    public static void cycles(){
+        Scanner scanner = new Scanner(System.in);
+        IntStream.range(0, scanner.nextInt()).forEach(x -> {
+            int height = IntStream.range(0, scanner.nextInt()).reduce(
+                    1,
+                    (acc, n) -> n % 2 == 0 ? acc * 2 : acc + 1
+            );
+            System.out.println(height);
+        });
     }
 
 }
