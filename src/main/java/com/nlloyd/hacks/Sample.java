@@ -1,4 +1,4 @@
-package main.java;
+package com.nlloyd.hacks;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -10,9 +10,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-/**
- * Created by nlloyd on 2/4/16.
- */
 public class Sample {
     public static void main(String[] args) throws Exception{
 
