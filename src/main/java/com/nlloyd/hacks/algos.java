@@ -5,8 +5,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class algos {
 
@@ -27,8 +29,7 @@ public class algos {
 //    //findDigits main
 //    public static void main(String[] args) {
 //        Scanner scanner = new Scanner(System.in);
-//        int times = scanner.nextInt();
-//        Collections.nCopies(times, null).forEach(x -> System.out.println(findDigits(scanner.next())));
+//        Stream.generate(scanner::next).limit(scanner.nextInt()).forEach(x -> System.out.println(findDigits(x)));
 //    }
 
     /**
@@ -38,8 +39,7 @@ public class algos {
     public static int sherlockAndSquares(int beg, int end) {
         double b = Math.sqrt((double) beg);
         double e = Math.sqrt((double) end);
-        int squares = (int) Math.floor(e) - (int) Math.ceil(b) + 1;
-        return squares;
+        return ((int) Math.floor(e) - (int) Math.ceil(b)) + 1;
     }
 
 //    //sherlockAndSquares main
@@ -63,8 +63,7 @@ public class algos {
 //    //cutTheSticks main
 //    public static void main(String[] args) {
 //        Scanner scanner = new Scanner(System.in);
-//        Collection<Integer> in = Collections.nCopies(scanner.nextInt(), null).stream()
-//                .map(x -> scanner.nextInt())
+//        Collection<Integer> in = Stream.generate(scanner::nextInt).limit(scanner.nextInt())
 //                .collect(Collectors.toList());
 //        while(in.size() > 0) {
 //            System.out.println(in.size());
@@ -78,17 +77,23 @@ public class algos {
      * The store offers a discount: for every MM wrappers he gives to the store, he gets one chocolate for free.
      * How many chocolates does Bob get to eat?
      */
-    public static int chocolateFeast(int cash, int cost, int wrappers){
-        return 0;
+    public static int chocolateFeast(int cash, int cost, int free){
+        int totalCandies = cash / cost;
+        int wrappers = totalCandies;
+        while(wrappers / free > 0){
+            int newCandies = wrappers / free;
+            totalCandies += newCandies;
+            wrappers = wrappers % free + newCandies;
+        }
+        return totalCandies;
     }
 
-    //chocolateFeast main
-    public static void main(String[] args){
-        Scanner scanner = new Scanner(System.in);
-        int times = scanner.nextInt();
-        IntStream.range(0, times).forEach(x -> {
-            System.out.println(chocolateFeast(scanner.nextInt(), scanner.nextInt(), scanner.nextInt()));
-        });
-    }
+//    //chocolateFeast main
+//    public static void main(String[] args){
+//        Scanner scanner = new Scanner(System.in);
+//        Stream.generate(() -> new Integer[]{scanner.nextInt(), scanner.nextInt(), scanner.nextInt()})
+//                .limit(scanner.nextInt())
+//                .forEach(x -> System.out.println(chocolateFeast(x[0], x[1], x[2])));
+//    }
 
 }
