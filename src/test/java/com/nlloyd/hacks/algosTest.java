@@ -1,13 +1,11 @@
 package com.nlloyd.hacks;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.function.Function;
-import java.util.function.IntConsumer;
+
+import static org.junit.Assert.assertEquals;
 
 public class algosTest {
 
@@ -63,6 +61,20 @@ public class algosTest {
         assertEquals(6, out1);
         assertEquals(3, out2);
         assertEquals(5, out3);
+    }
+
+    @Test
+    public void test_caeserCipher(){
+        String in1 = "middle-Outz";
+        int off1 = 2;
+        String in2 = "www.abc.xy";
+        int off2 = 87;
+
+        String out = algos.caesarCipher(in1, off1);
+        String out2 = algos.caesarCipher(in2, off2);
+
+        assertEquals("okffng-Qwvb", out);
+        assertEquals("fff.jkl.gh", out2);
     }
 
 }

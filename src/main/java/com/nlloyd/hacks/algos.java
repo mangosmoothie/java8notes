@@ -1,14 +1,7 @@
 package com.nlloyd.hacks;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Scanner;
-import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class algos {
 
@@ -18,7 +11,7 @@ public class algos {
      * Print the number of evenly divisible digits.
      */
     public static String findDigits(String number) {
-        int num = Integer.parseInt(number);
+        final int num = Integer.parseInt(number);
         return Long.toString(
                 number.chars()
                         .map(Character::getNumericValue)
@@ -36,9 +29,9 @@ public class algos {
      * Watson gives two integers (AA and BB) to Sherlock and asks if he can
      * count the number of square integers between AA and BB (both inclusive).
      */
-    public static int sherlockAndSquares(int beg, int end) {
-        double b = Math.sqrt((double) beg);
-        double e = Math.sqrt((double) end);
+    public static int sherlockAndSquares(final int beg, final int end) {
+        final double b = Math.sqrt((double) beg);
+        final double e = Math.sqrt((double) end);
         return ((int) Math.floor(e) - (int) Math.ceil(b)) + 1;
     }
 
@@ -55,8 +48,8 @@ public class algos {
      * You are given NN sticks, where the length of each stick is a positive integer.
      * A cut operation is performed on the sticks such that all of them are reduced by the length of the smallest stick.
      */
-    public static Collection<Integer> cutTheSticks(Collection<Integer> rods) {
-        int min = rods.stream().min(Integer::compare).get();
+    public static Collection<Integer> cutTheSticks(final Collection<Integer> rods) {
+        final int min = rods.stream().min(Integer::compare).get();
         return rods.stream().map(x -> x - min).filter(x -> x > 0).collect(Collectors.toList());
     }
 
@@ -77,7 +70,7 @@ public class algos {
      * The store offers a discount: for every MM wrappers he gives to the store, he gets one chocolate for free.
      * How many chocolates does Bob get to eat?
      */
-    public static int chocolateFeast(int cash, int cost, int free){
+    public static int chocolateFeast(final int cash, final int cost, final int free){
         int totalCandies = cash / cost;
         int wrappers = totalCandies;
         while(wrappers / free > 0){
@@ -94,6 +87,39 @@ public class algos {
 //        Stream.generate(() -> new Integer[]{scanner.nextInt(), scanner.nextInt(), scanner.nextInt()})
 //                .limit(scanner.nextInt())
 //                .forEach(x -> System.out.println(chocolateFeast(x[0], x[1], x[2])));
+//    }
+
+    //65 - 90 caps 97 - 122 z
+
+    /**
+     * Julius Caesar protected his confidential information by encrypting it in a cipher.
+     * Caesar's cipher rotated every letter in a string by a fixed number, KK, making it unreadable by his enemies.
+     * Given a string, SS, and a number, KK, encrypt SS and print the resulting string.
+     */
+    public static String caesarCipher(final String in, final int offset){
+        int[] out = in.chars().map(x -> encode(x, offset % 26)).toArray();
+        return new String(out, 0, out.length);
+    }
+
+    public static int encode(final int charCd, final int offset){
+        if(charCd < 91 && charCd > 64){
+            final int out = (charCd + offset) % 91;
+            return out < 65 ? out + 65 : out;
+        }else if(charCd < 123 && charCd > 96){
+            final int out = (charCd + offset) % 123;
+            return out < 97 ? out + 97 : out;
+        }else{
+            return charCd;
+        }
+    }
+
+//    //caesarCipher main
+//    public static void main(String[] args){
+//        Scanner scanner = new Scanner(System.in);
+//        scanner.nextInt();
+//        String in = scanner.next();
+//        int offset = scanner.nextInt();
+//        System.out.println(caesarCipher(in, offset));
 //    }
 
 }
